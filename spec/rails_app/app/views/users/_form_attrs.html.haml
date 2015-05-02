@@ -1,0 +1,4 @@
+= f.text_field :user_name
+
+= f.fields_for :roles do |rf|
+  = rf.text_field :role_name
