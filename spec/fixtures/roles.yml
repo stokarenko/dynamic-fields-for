@@ -1,0 +1,11 @@
+role_1:
+  user: existing
+  role_name: role 1
+
+role_2:
+  user: existing
+  role_name: role 2
+
+role_3:
+  user: existing
+  role_name: role 3
