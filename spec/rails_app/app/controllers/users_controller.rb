@@ -2,6 +2,10 @@ class UsersController < ApplicationController
   before_action :build_resource, only: [:new, :create]
   before_action :load_resource, only: [:edit, :update]
 
+  def new
+    3.times{ @resource.roles.build }
+  end
+
   def create
     @resource.update_attributes!(resource_params)
     redirect_to edit_user_path(@resource)
