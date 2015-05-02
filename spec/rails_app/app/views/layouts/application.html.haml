@@ -2,6 +2,6 @@
 %html
   %head
     %title DynamicFieldsFor Test App
-    %style= '.hidden{display: none;}'
+    = javascript_include_tag "application", "data-turbolinks-track" => true
 
   %body= yield
