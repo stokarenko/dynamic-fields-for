@@ -1,7 +1,17 @@
 DynamicFieldsFor
 ================
 
-DynamicFieldsFor is a Rails plugin which provides the dynamic association fieldsets to your form without pain.
+DynamicFieldsFor is a Rails plugin which provides the dynamic association fieldsets to your forms without a pain. The main features are:
+* Don't breakes the HTML layout - no any wrappers, additional divs etc;
+* Works with fields block, i.e. not requires the separated partial for them;
+* Not provides new form helpers, but extend the existing ones;
+* Simple and predictable interface;
+* Not requires any special HTML tags or layout inside templates;
+* [Simple Form](https://github.com/plataformatec/simple_form) support.
+
+## Alternatives
+* [coccon](https://github.com/nathanvda/cocoon)
+* [Nested Form](https://github.com/ryanb/nested_form)
 
 ## Getting started
 
@@ -46,15 +56,15 @@ Add to User model:
 accepts_nested_attributes_for :roles, allow_destroy: true
 ```
 
-Skip `allow_destroy` definition if you don't need to use `remove_fields` helper).
+Skip `allow_destroy` definition if you don't need to use `dynamic_fields_remove_link` helper).
 
 Take care about strong parameters in controller like that:
 ```ruby
 params.require(:user).permit(roles_attributes: [:id, :_destroy])
 ```
 
-It is important to allow `id` role's parameter, don't miss it. As for `_destroy`,
-skip it if you don't need to use `remove_fields` helper.
+It is important to permit `id` role's parameter, don't miss it. As for `_destroy`,
+skip it if you don't need to use `dynamic_fields_remove_link` helper.
 
 Then, in view:
 ```haml
@@ -70,7 +80,7 @@ Then, in view:
   = f.submit
 ```
 
-DynamicFieldsFor supports SimpleForm, use it like:
+DynamicFieldsFor supports SimpleForm:
 ```haml
 = simple_form_for resource do |f|
   = f.input :user_name
