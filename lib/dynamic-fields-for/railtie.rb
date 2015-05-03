@@ -1,7 +1,7 @@
 require 'active_record/railtie'
 
 module DynamicFieldsFor
-  class Railtie < Rails::Engine
+  class Engine < Rails::Engine
 
     initializer 'dynamic-fields-for.configure_rails_initialization' do
       ActiveSupport.on_load :action_view do

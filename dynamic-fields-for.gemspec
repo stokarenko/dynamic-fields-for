@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.description = s.summary
   s.license     = 'MIT'
 
-  s.files       = Dir['{lib}/**/*', 'LICENSE', 'README.md']
+  s.files       = Dir['{app}/**/*', '{lib}/**/*', 'LICENSE', 'README.md']
 
   s.add_dependency 'rails', '~> 4.1.8'
   s.add_dependency 'coffee-rails'

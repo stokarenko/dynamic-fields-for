@@ -1,17 +1,25 @@
 describe '#dynamic_fields_for' do
   def expect_result(user)
     expect(page).to have_button('Update User')
-    expect(user.roles.map(&:role_name)).to match_array(['role 0', 'role 1', 'role 2', 'new role 0', 'new role 1', 'new role 2'])
+    expect(user.roles.map(&:role_name)).to match_array(['role 0', 'new role 0', 'new role 1'])
   end
 
   def role_inputs
     all('[name$="[role_name]"]')
   end
 
-  def deal_with_dynamic_roles
-    3.times{ click_link 'Add role' }
+  def remove_links
+    all('a', text: 'Remove role')
+  end
 
-    role_inputs.last(3).each_with_index do |element, index|
+  def deal_with_dynamic_roles
+    remove_links.last.click
+    2.times{ click_link 'Add role'}
+    remove_links.last.click
+    click_link 'Add role'
+    remove_links[1].click
+
+    role_inputs.last(2).each_with_index do |element, index|
       element.set("new role #{index}")
     end
   end
@@ -24,9 +32,7 @@ describe '#dynamic_fields_for' do
     deal_with_dynamic_roles
 
     fill_in 'user[user_name]', with: 'New user'
-    role_inputs.first(3).each_with_index do |element, index|
-      element.set("role #{index}")
-    end
+    role_inputs.first.set('role 0')
 
     click_button 'Create User'
 
