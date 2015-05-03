@@ -94,5 +94,30 @@ DynamicFieldsFor supports SimpleForm:
   = f.submit
 ```
 
+## JavaScript events
+There are two events, `dynamic-fields:add` and `dynamic-fields:remove`, which will be
+triggered by DynamicFieldsFor. They will be triggered to each element inserted by
+`dynamic_fields_add_link`, or removed by `dynamic_fields_remove_link`, respectively.
+
+Remember, there is no any wrappers or containers, events will be triggered to each element
+affected by insertions or deletion. To deal with this, use `$.find2` javascript helper,
+which provided by DynamicFieldsFor:
+
+```js
+$('#some_id').find2('.some_class');
+// doing the same as...
+$('#some_id').find('.some_class').add($('#some_id').filter('.some_class'));
+```
+
+Typical event callback should looks like:
+
+```js
+$(document).on('dynamic-fields:add', function(event){
+  $(event.target).find2('.datepicker').datetimepicker();
+})
+```
+
 ## TODO
 * Try use HTML comments instead script tags.
+* Remove everything instead id and _destroy (?).
+* Don't trigger events on script tag.
