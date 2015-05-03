@@ -1,4 +1,6 @@
 = f.text_field :user_name
 
-= f.fields_for :roles do |rf|
+= f.dynamic_fields_for :roles do |rf|
   = rf.text_field :role_name
+
+= f.dynamic_fields_add_link :roles, 'Add role'

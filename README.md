@@ -1,6 +1,21 @@
 DynamicFieldsFor
 ================
 
+## Getting started
+
+Add to your Gemfile:
+
+```ruby
+  gem 'dynamic-fields-for'
+```
+
+Run the bundle command to install it.
+
+Add to `app/assets/javascripts/application.js`:
+```js
+//= require dynamic-fields-for
+```
+
 ## Usage
 Lets say that we have the models:
 
