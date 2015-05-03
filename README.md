@@ -83,3 +83,6 @@ DynamicFieldsFor supports SimpleForm, use it like:
 
   = f.submit
 ```
+
+## TODO
+* Try use HTML comments instead script tags.

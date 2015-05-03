@@ -3,8 +3,13 @@ $(document).on 'ready page:load', ->
 
   $(document).on 'click', '[data-dynamic-fields-remove]', (event) ->
     event.preventDefault()
-    fieldset = $(this).
-      prevAll("[data-dynamic-fields-item-begin]:first").
+
+    node = $(this)
+
+    while (fieldset = node.prevAll("[data-dynamic-fields-item-begin]:first"); fieldset.length == 0)
+      node = node.parent()
+
+    fieldset = fieldset.
       nextUntil('[data-dynamic-fields-item-begin], [data-dynamic-fields-end]').
       andSelf()
     destroy_input = $(this).prev()
