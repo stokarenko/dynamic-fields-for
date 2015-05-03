@@ -1,3 +1,5 @@
+= link_to 'Edit', edit_user_path(@resource)
+
 = form_for @resource do |f|
   = f.dynamic_fields_remove_link 'Remove without fields'
   = f.submit 'Update without fields'

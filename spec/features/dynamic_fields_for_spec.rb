@@ -66,5 +66,15 @@ describe DynamicFieldsFor::FormHelper do
       click_button 'Update without fields'
       expect(page).to have_button('Update User')
     end
+
+    it 'should deal with turbolinks' do
+      visit "/users/#{user.id}/edit_without_fields"
+      click_link 'Edit'
+
+      within('#form_for') do
+        expect{click_link 'Add role'}.to change{remove_links.size}.from(3).to(4)
+      end
+
+    end
   end
 end
