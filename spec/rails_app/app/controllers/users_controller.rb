@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :build_resource, only: [:new, :create]
-  before_action :load_resource, only: [:edit, :update]
+  before_action :load_resource, only: [:edit_without_fields, :edit, :update]
 
   def new
     3.times{ @resource.roles.build }

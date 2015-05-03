@@ -58,5 +58,13 @@ describe DynamicFieldsFor::FormHelper do
         end
       end
     end
+
+    it 'should not fail when remove link clicked but dynamic fields are not exists' do
+      visit "/users/#{user.id}/edit_without_fields"
+
+      click_link 'Remove without fields'
+      click_button 'Update without fields'
+      expect(page).to have_button('Update User')
+    end
   end
 end

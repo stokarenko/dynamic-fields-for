@@ -8,6 +8,7 @@ $(document).on 'ready page:load', ->
 
     while (fieldset = node.prevAll("[data-dynamic-fields-item-begin]:first"); fieldset.length == 0)
       node = node.parent()
+      break if node.length == 0
 
     fieldset = fieldset.
       nextUntil('[data-dynamic-fields-item-begin], [data-dynamic-fields-end]').
