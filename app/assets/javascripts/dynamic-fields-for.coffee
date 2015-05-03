@@ -22,6 +22,8 @@ $(document).on 'click', '[data-dynamic-fields-remove]', (event) ->
   else
     fieldset.remove()
 
+  fieldset.trigger('dynamic-fields:remove')
+
 $(document).on 'click', '[data-dynamic-fields-add]', (event) ->
   event.preventDefault()
 
