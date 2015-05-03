@@ -27,7 +27,7 @@ describe DynamicFieldsFor::FormHelper do
 
     let(:user){User.first}
 
-    %w(form_for).each do |form_type|
+    %w(form_for simple_form_for).each do |form_type|
       context form_type do
 
         it 'should pass for new object' do

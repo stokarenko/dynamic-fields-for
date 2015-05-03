@@ -7,6 +7,8 @@ module DynamicFieldsFor
     end
 
     def dynamic_fields_for(association, record_object = nil, options = {}, &block)
+      options, record_object = record_object, nil if record_object.is_a?(Hash) && record_object.extractable_options?
+
       options.merge!(dynamic_fields: true)
 
       collection_output = fields_for(association, record_object, options, &block)

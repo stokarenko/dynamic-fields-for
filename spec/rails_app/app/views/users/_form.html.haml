@@ -9,3 +9,15 @@
     = f.dynamic_fields_add_link :roles, 'Add role'
 
     = f.submit
+
+#simple_form_for
+  = simple_form_for resource do |f|
+    = f.input :user_name
+
+    = f.simple_dynamic_fields_for :roles do |rf|
+      = rf.input :role_name
+      = rf.dynamic_fields_remove_link 'Remove role'
+
+    = f.dynamic_fields_add_link :roles, 'Add role'
+
+    = f.submit
