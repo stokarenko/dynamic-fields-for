@@ -1,3 +1,6 @@
+$.fn.find2 = (selector) ->
+  this.filter(selector).add(this.find(selector))
+
 dynamic_fields_counter = 0
 
 $(document).on 'click', '[data-dynamic-fields-remove]', (event) ->
@@ -25,8 +28,9 @@ $(document).on 'click', '[data-dynamic-fields-add]', (event) ->
   dynamic_fields_id = $(this).data('dynamicFieldsAdd')
   fieldset_begin = $("[data-dynamic-fields-begin=#{dynamic_fields_id}]")
   fieldset_end = $("[data-dynamic-fields-end=#{dynamic_fields_id}]")
-  template = fieldset_begin.data('dynamicFieldsTemplate').replace(
+  template = $(fieldset_begin.data('dynamicFieldsTemplate').replace(
     /dynamic_fields_index/g,
     new Date().getTime() + dynamic_fields_counter++
-  )
+  ))
   fieldset_end.before(template)
+  template.trigger('dynamic-fields:add')

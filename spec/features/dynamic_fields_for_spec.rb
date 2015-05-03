@@ -76,5 +76,12 @@ describe DynamicFieldsFor::FormHelper do
       end
 
     end
+
+    it 'should trigger add event' do
+      visit "/users/#{user.id}/events"
+
+      click_link('Add role')
+      expect(page).to have_selector('.add_event_catcher', text: 'add event catched')
+    end
   end
 end
