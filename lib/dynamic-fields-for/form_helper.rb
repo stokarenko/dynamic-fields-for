@@ -7,10 +7,10 @@ module DynamicFieldsFor
     end
 
     def dynamic_fields_for(association, record_object = nil, options = {}, &block)
-      options = {dynamic_fields: true}.merge(options)
-      collection_options = options.dup
-      collection_output = fields_for(association, record_object, collection_options, &block)
-      new_output = fields_for(association, @object.send(association).soft_build, {child_index: 'dynamic_fields_index'}.merge(options), &block)
+      options.merge!(dynamic_fields: true)
+
+      collection_output = fields_for(association, record_object, options, &block)
+      new_output = fields_for(association, @object.send(association).soft_build, options.merge(child_index: 'dynamic_fields_index'), &block)
 
       @template.content_tag(:div, collection_output, data: {
         'dynamic-fields' => "#{self.object_id}-#{association}",
