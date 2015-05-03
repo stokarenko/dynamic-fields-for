@@ -14,9 +14,15 @@ module DynamicFieldsFor
       collection_output = fields_for(association, record_object, options, &block)
       new_output = fields_for(association, @object.send(association).soft_build, options.merge(child_index: 'dynamic_fields_index'), &block)
 
-      @template.content_tag(:div, collection_output, data: {
-        'dynamic-fields' => "#{self.object_id}-#{association}",
+      dynamic_fields_id = "#{self.object_id}-#{association}"
+
+      @template.content_tag(:script, nil, data: {
+        'dynamic-fields-begin' => dynamic_fields_id,
         'dynamic-fields-template' => CGI.escapeHTML(new_output).html_safe
+      }) +
+      collection_output +
+      @template.content_tag(:script, nil, data: {
+        'dynamic-fields-end' => dynamic_fields_id
       })
     end
 
@@ -33,9 +39,11 @@ module DynamicFieldsFor
 
     def fields_for_nested_model_with_dynamic_fields(name, object, fields_options, block)
       output = fields_for_nested_model_without_dynamic_fields(name, object, fields_options, block)
-      fields_options[:dynamic_fields] ?
-        @template.content_tag(:div, output, data: {'dynamic-fields-item' => true}) :
-        output
+      return output unless fields_options[:dynamic_fields]
+
+      @template.content_tag(:script, nil, data: {
+        'dynamic-fields-item-begin' => true
+      }) + output
     end
 
   end
