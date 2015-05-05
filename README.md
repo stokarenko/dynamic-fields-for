@@ -1,7 +1,9 @@
 DynamicFieldsFor
 ================
 
-DynamicFieldsFor is a Rails plugin which provides the dynamic association fieldsets to your forms without a pain. The main features are:
+DynamicFieldsFor is a Rails plugin which provides the dynamic association fieldsets to your forms without a pain. And it does nothing more.
+
+The main features are:
 * Don't breakes the HTML layout - no any wrappers, additional divs etc;
 * Works with fields block, i.e. not requires the separated partial for them;
 * Not provides new form helpers, but extend the existing ones;
@@ -95,21 +97,33 @@ DynamicFieldsFor supports SimpleForm:
 ```
 
 ## JavaScript events
-### Events triggered on inserted or removed elements
-There are two events, `dynamic-fields:after-add` and `dynamic-fields:before-remove`,
-which will be triggered by DynamicFieldsFor. They will be triggered to each
-first-level element inserted by `dynamic_fields_add_link`, or removed by
-`dynamic_fields_remove_link`, respectively. To deal with this,
-use `$.find2` javascript helper, which provided by DynamicFieldsFor:
+There are the events which will be triggered on `dynamic_fields_add_link` click, in actual order:
+* `dynamic-fields:before-add-into` touched to dynamic fields parent node;
+* `dynamic-fields:after-add` touched to each first-level elements which was inserted;
+* `dynamic-fields:after-add-into` touched to dynamic fields parent node;
 
+Like that, these events will be triggered on `dynamic_fields_add_link` click, in actual order:
+* `dynamic-fields:before-remove-from` touched to dynamic fields parent node;
+* `dynamic-fields:before-remove` touched to each first-level elements which going to be removed;
+* `dynamic-fields:after-remove-from` touched to dynamic fields parent node;
+
+Typical callback for dynamic fields parent node looks like:
+```js
+$(document).on('dynamic-fields:after-add-into', function(event){
+  $(event.target).find('li').order();
+})
+```
+
+As for first-level elements, need to remember that compatible callbacks
+will be triggered to each of them. To deal with this,
+use `$.find2` javascript helper, which provided by DynamicFieldsFor:
 ```js
 $('#some_id').find2('.some_class');
 // doing the same as...
 $('#some_id').find('.some_class').add($('#some_id').filter('.some_class'));
 ```
 
-Typical event callback should looks like:
-
+Typical event callback first-level elements should looks like:
 ```js
 $(document).on('dynamic-fields:after-add', function(event){
   $(event.target).find2('.datepicker').datetimepicker();

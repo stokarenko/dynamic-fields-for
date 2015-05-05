@@ -81,14 +81,29 @@ describe DynamicFieldsFor::FormHelper do
       visit "/users/#{user.id}/events"
 
       click_link('Add role')
-      expect(page).to have_selector('#event_catcher', text: 'dynamic-fields:after-add : role_name dynamic-fields:after-add : remove_link')
+      expect(page).to have_selector(
+        '#event_catcher', text: %Q(
+          dynamic-fields:before-add-into : fields_container
+          dynamic-fields:after-add : role_name
+          dynamic-fields:after-add : remove_link
+          dynamic-fields:after-add-into : fields_container
+        ).gsub(/\s{2,}/, ' ').strip
+      )
     end
 
     it 'should trigger remove event' do
       visit "/users/#{user.id}/events"
 
       all('a', text: 'Remove role').last.click
-      expect(page).to have_selector('#event_catcher', text: 'dynamic-fields:before-remove : role_name dynamic-fields:before-remove : remove_link')
+      expect(page).to have_selector(
+        '#event_catcher', text: %Q(
+          dynamic-fields:before-remove-from : fields_container
+          dynamic-fields:before-remove : role_name
+          dynamic-fields:before-remove : remove_link
+          dynamic-fields:before-remove : id
+          dynamic-fields:after-remove-from : fields_container
+        ).gsub(/\s{2,}/, ' ').strip
+      )
     end
 
   end

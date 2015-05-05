@@ -31,11 +31,15 @@ class DynamicFields
     @$fields_begin = $fields_begin
     @$fields_end = @_$anchor('end')
 
+    @$fields_parent = @$fields_begin.parent()
+
   add: ->
     fields_add = $(@_render_insertion('Add'))
 
+    @$fields_parent.trigger('dynamic-fields:before-add-into')
     @$fields_end.before(fields_add)
     fields_add.not('script').trigger('dynamic-fields:after-add')
+    @$fields_parent.trigger('dynamic-fields:after-add-into')
 
   remove: ($element) ->
     node = $element
@@ -56,8 +60,10 @@ class DynamicFields
       nextUntil("#{@_anchor('item-begin')}, #{@_anchor('end')}").
       andSelf()
 
+    @$fields_parent.trigger('dynamic-fields:before-remove-from')
     fields_remove.not('script').trigger('dynamic-fields:before-remove')
     fields_remove.remove()
+    @$fields_parent.trigger('dynamic-fields:after-remove-from')
 
   _anchor: (postfix) ->
     @constructor._anchor(postfix, @fields_id)
