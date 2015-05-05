@@ -2,4 +2,5 @@
 
 = form_for @resource do |f|
   = f.dynamic_fields_remove_link 'Remove without fields'
+  = f.dynamic_fields_add_link :roles, 'Add without fields'
   = f.submit 'Update without fields'

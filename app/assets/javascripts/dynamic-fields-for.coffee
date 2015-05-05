@@ -6,15 +6,18 @@ class DynamicFields
   @_counter = 0
 
   @add: (element) ->
-    @_find($(element).data('dynamicFieldsAdd')).add()
+    lazy_dynamic_fields = @_find($(element).data('dynamicFieldsAdd'))
+    lazy_dynamic_fields.add() if lazy_dynamic_fields
 
   @remove: (element) ->
-    @_find($(element).data('dynamicFieldsRemove')).remove($(element))
+    lazy_dynamic_fields = @_find($(element).data('dynamicFieldsRemove'))
+    lazy_dynamic_fields.remove($(element)) if lazy_dynamic_fields
 
   @_find: (fields_id) ->
-    object = @_$anchor('begin', fields_id)
-    element = object.get(0)
-    element.lazy_dynamic_fields ||= new @ object
+    $fields_begin = @_$anchor('begin', fields_id)
+    fields_begin = $fields_begin.get(0)
+    return null unless fields_begin
+    fields_begin.lazy_dynamic_fields ||= new @ $fields_begin
 
   @_anchor: (postfix, fields_id) ->
     "[data-dynamic-fields-#{postfix}=#{fields_id}]"
