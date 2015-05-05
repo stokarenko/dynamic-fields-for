@@ -2,8 +2,8 @@
 #= require turbolinks
 #= require dynamic-fields-for
 
-$(document).on 'dynamic-fields:add', (e)->
-  $(e.target).find2('.add_event_catcher').html('add event catched')
+$(document).on 'dynamic-fields:after-add', (e)->
+  $('#event_catcher').append("dynamic-fields:after-add : #{e.target.className}<br />")
 
-$(document).on 'dynamic-fields:remove', (e)->
-  $('.remove_event_catcher').html($(e.target).find2('.role_name').val())
+$(document).on 'dynamic-fields:before-remove', (e)->
+  $('#event_catcher').append("dynamic-fields:before-remove : #{e.target.className}<br />")
