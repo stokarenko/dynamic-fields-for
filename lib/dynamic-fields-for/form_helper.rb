@@ -35,11 +35,11 @@ module DynamicFieldsFor
       })
     end
 
-    def dynamic_fields_add_link(association, label, options = {})
+    def add_fields_link(association, label, options = {})
       @template.link_to(label, '#', {data: {'dynamic-fields-add' => dynamic_fields_id(association)}}.deep_merge(options))
     end
 
-    def dynamic_fields_remove_link(label, options = {})
+    def remove_fields_link(label, options = {})
       data_options = {data: {'dynamic-fields-remove' => @options[:dynamic_fields_id]}}
       data_options[:data]['dynamic-fields-remove-id'] = @object.id if @object.try(:persisted?)
 

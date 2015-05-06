@@ -58,7 +58,7 @@ Add to User model:
 accepts_nested_attributes_for :roles, allow_destroy: true
 ```
 
-Skip `allow_destroy` definition if you don't need to use `dynamic_fields_remove_link` helper).
+Skip `allow_destroy` definition if you don't need to use `remove_fields_link` helper).
 
 Take care about strong parameters in controller like that:
 ```ruby
@@ -66,7 +66,7 @@ params.require(:user).permit(roles_attributes: [:id, :_destroy])
 ```
 
 It is important to permit `id` role's parameter, don't miss it. As for `_destroy`,
-skip it if you don't need to use `dynamic_fields_remove_link` helper.
+skip it if you don't need to use `remove_fields_link` helper.
 
 Then, in view:
 ```haml
@@ -75,9 +75,9 @@ Then, in view:
 
   = f.dynamic_fields_for :roles do |rf|
     = rf.text_field :role_name
-    = rf.dynamic_fields_remove_link 'Remove role'
+    = rf.remove_fields_link 'Remove role'
 
-  = f.dynamic_fields_add_link :roles, 'Add role'
+  = f.add_fields_link :roles, 'Add role'
 
   = f.submit
 ```
@@ -89,20 +89,20 @@ DynamicFieldsFor supports SimpleForm:
 
   = f.simple_dynamic_fields_for :roles do |rf|
     = rf.input :role_name
-    = rf.dynamic_fields_remove_link 'Remove role'
+    = rf.remove_fields_link 'Remove role'
 
-  = f.dynamic_fields_add_link :roles, 'Add role'
+  = f.add_fields_link :roles, 'Add role'
 
   = f.submit
 ```
 
 ## JavaScript events
-There are the events which will be triggered on `dynamic_fields_add_link` click, in actual order:
+There are the events which will be triggered on `add_fields_link` click, in actual order:
 * `dynamic-fields:before-add-into` touched to dynamic fields parent node;
 * `dynamic-fields:after-add` touched to each first-level elements which was inserted;
 * `dynamic-fields:after-add-into` touched to dynamic fields parent node;
 
-Like that, these events will be triggered on `dynamic_fields_add_link` click, in actual order:
+Like that, these events will be triggered on `add_fields_link` click, in actual order:
 * `dynamic-fields:before-remove-from` touched to dynamic fields parent node;
 * `dynamic-fields:before-remove` touched to each first-level elements which going to be removed;
 * `dynamic-fields:after-remove-from` touched to dynamic fields parent node;

@@ -4,9 +4,9 @@
   .fields_container
     = f.dynamic_fields_for :roles do |rf|
       = rf.text_field :role_name, class: 'role_name'
-      = rf.dynamic_fields_remove_link 'Remove role', class: 'remove_link'
+      = rf.remove_fields_link 'Remove role', class: 'remove_link'
 
-  = f.dynamic_fields_add_link :roles, 'Add role'
+  = f.add_fields_link :roles, 'Add role'
 
   = f.submit
 

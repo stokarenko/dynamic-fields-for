@@ -1,6 +1,6 @@
 = link_to 'Edit', edit_user_path(@resource)
 
 = form_for @resource do |f|
-  = f.dynamic_fields_remove_link 'Remove without fields'
-  = f.dynamic_fields_add_link :roles, 'Add without fields'
+  = f.remove_fields_link 'Remove without fields'
+  = f.add_fields_link :roles, 'Add without fields'
   = f.submit 'Update without fields'
