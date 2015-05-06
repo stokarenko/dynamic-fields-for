@@ -5,7 +5,7 @@ PATH
       association-soft-build
       coffee-rails
       jquery-rails
-      rails (~> 4.1.8)
+      rails (~> 4.1.0)
 
 GEM
   remote: http://rubygems.org/
@@ -37,10 +37,10 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
     arel (5.0.1.20140414130214)
-    association-soft-build (0.0.1)
-      activerecord (~> 4.1)
-      activesupport (~> 4.1)
-      railties (~> 4.1)
+    association-soft-build (0.0.2)
+      activerecord (>= 3.2.13)
+      activesupport (>= 3.2.13)
+      railties (>= 3.2.13)
     builder (3.2.2)
     capybara (2.4.4)
       mime-types (>= 1.16)
