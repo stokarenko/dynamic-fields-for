@@ -3,31 +3,34 @@ module DynamicFieldsFor
     extend ActiveSupport::Concern
 
     included do
+      alias_method_chain :fields_for, :dynamic_fields
       alias_method_chain :fields_for_nested_model, :dynamic_fields
     end
 
-    def dynamic_fields_for(association, record_object = nil, options = {}, &block)
+    def fields_for_with_dynamic_fields(association, record_object = nil, options = {}, &block)
       #Inherit the native parameters adjustment
       options, record_object = record_object, nil if record_object.is_a?(Hash) && record_object.extractable_options?
+
+      return fields_for_without_dynamic_fields(association, record_object, options, &block) unless options.delete(:dynamic)
 
       new_object = @object.send(association).soft_build
 
       options[:child_index] = 'dynamic_fields_index'
-      remove_template = fields_for(association, new_object, options) do |f|
+      remove_template = fields_for_without_dynamic_fields(association, new_object, options) do |f|
         f.hidden_field(:id, value: 'dynamic_fields_object_id') +
         f.hidden_field(:_destroy, value: true)
       end
 
       options[:dynamic_fields_id] = dynamic_fields_id(association)
-      new_template = fields_for(association, new_object, options, &block)
+      add_template = fields_for_without_dynamic_fields(association, new_object, options, &block)
 
       options.delete(:child_index)
-      collection_output = fields_for(association, record_object, options, &block)
+      collection_output = fields_for_without_dynamic_fields(association, record_object, options, &block)
 
       @template.content_tag(:script, nil, data: {
         'dynamic-fields-begin' => options[:dynamic_fields_id],
-        'dynamic-fields-add-template' => CGI.escapeHTML(new_template).html_safe,
-        'dynamic-fields-remove-template' => remove_template
+        'dynamic-fields-add-template' => CGI.escapeHTML(add_template).html_safe,
+        'dynamic-fields-remove-template' => CGI.escapeHTML(remove_template).html_safe
       }) +
       collection_output +
       @template.content_tag(:script, nil, data: {

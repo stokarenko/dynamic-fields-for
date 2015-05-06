@@ -73,7 +73,7 @@ Then, in view:
 = form_for resource do |f|
   = f.text_field :user_name
 
-  = f.dynamic_fields_for :roles do |rf|
+  = f.fields_for :roles, dynamic: true do |rf|
     = rf.text_field :role_name
     = rf.remove_fields_link 'Remove role'
 
@@ -87,7 +87,7 @@ DynamicFieldsFor supports SimpleForm:
 = simple_form_for resource do |f|
   = f.input :user_name
 
-  = f.simple_dynamic_fields_for :roles do |rf|
+  = f.simple_fields_for :roles, dynamic: true do |rf|
     = rf.input :role_name
     = rf.remove_fields_link 'Remove role'
 

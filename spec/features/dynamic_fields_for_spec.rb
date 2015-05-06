@@ -1,5 +1,5 @@
 describe DynamicFieldsFor::FormHelper do
-  describe '#dynamic_fields_for' do
+  describe '#fields_for' do
     def expect_result(user)
       expect(page).to have_button('Update User')
       expect(user.roles.map(&:role_name)).to match_array(['role 0', 'new role 0', 'new role 1'])

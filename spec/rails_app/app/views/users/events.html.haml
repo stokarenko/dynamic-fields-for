@@ -2,7 +2,7 @@
   = f.text_field :user_name
 
   .fields_container
-    = f.dynamic_fields_for :roles do |rf|
+    = f.fields_for :roles, dynamic: true do |rf|
       = rf.text_field :role_name, class: 'role_name'
       = rf.remove_fields_link 'Remove role', class: 'remove_link'
 
