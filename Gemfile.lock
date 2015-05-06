@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    dynamic-fields-for (0.0.3)
+    dynamic-fields-for (1.0.0)
       association-soft-build
       coffee-rails
       jquery-rails
