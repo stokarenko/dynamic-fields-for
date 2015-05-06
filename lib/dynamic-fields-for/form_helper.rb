@@ -50,7 +50,7 @@ module DynamicFieldsFor
       dynamic_item_begin_mark = fields_options.has_key?(:dynamic_fields_id) ?
         @template.content_tag(:script, nil, data: {
           'dynamic-fields-item-begin' => fields_options[:dynamic_fields_id]
-        }) : ''
+        }) : ''.html_safe
 
         dynamic_item_begin_mark +
         fields_for_nested_model_without_dynamic_fields(name, object, fields_options, block)
