@@ -1,6 +1,7 @@
 source 'http://rubygems.org'
 
 group :development, :test do
+  gem 'appraisal'
   gem 'turbolinks'
   gem 'simple_form'
   gem 'haml'
