@@ -4,7 +4,7 @@ PATH
     dynamic-fields-for (1.0.0)
       association-soft-build
       jquery-rails
-      rails (~> 4.1.0)
+      rails (>= 4.1.0)
 
 GEM
   remote: http://rubygems.org/
