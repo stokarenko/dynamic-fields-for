@@ -1,0 +1,3 @@
+unless DynamicFieldsFor.rails4?
+  Rails.application.config.secret_token = '8cec03a73bd1f8cdf2c519131bb5475775684177ce99c27c254e9617313950f06972cd0e027ea5627570b133f8d5385bd5aaec119351f65bec03a0facb0de559'
+end
