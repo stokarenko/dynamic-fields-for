@@ -3,7 +3,6 @@ PATH
   specs:
     dynamic-fields-for (1.0.0)
       association-soft-build
-      coffee-rails
       jquery-rails
       rails (~> 4.1.0)
 
@@ -149,6 +148,7 @@ DEPENDENCIES
   bundler
   capybara
   capybara-webkit
+  coffee-script
   dynamic-fields-for!
   haml
   rspec-rails

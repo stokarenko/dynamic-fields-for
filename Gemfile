@@ -4,6 +4,7 @@ group :development, :test do
   gem 'turbolinks'
   gem 'simple_form'
   gem 'haml'
+  gem 'coffee-script'
   gem 'rspec-rails'
   gem 'capybara'
   gem 'capybara-webkit'
