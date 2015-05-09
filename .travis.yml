@@ -16,8 +16,6 @@ matrix:
       gemfile: gemfiles/rails_3.2.gemfile
 
 cache: bundler
-before_install: "rm ${BUNDLE_GEMFILE}.lock"
-before_script: "bundle update"
 script: 'xvfb-run bundle exec rspec'
 
 notifications:
