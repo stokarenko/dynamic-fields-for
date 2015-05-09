@@ -1,5 +1,6 @@
 DynamicFieldsFor
 ================
+[![Gem Version](https://badge.fury.io/rb/dynamic-fields-for.svg)](http://badge.fury.io/rb/dynamic-fields-for)
 
 DynamicFieldsFor is a Rails plugin which provides the dynamic association fieldsets to your forms without a pain. And it does nothing more.
 
@@ -8,7 +9,7 @@ The main features are:
 * Works with fields block, i.e. not requires the separated partial for them;
 * Not provides new form helpers, but extend the existing one;
 * Simple and predictable interface and behavior;
-* Not requires any special HTML intities inside templates;
+* Not requires any special HTML entities inside templates;
 * Supports [Simple Form](https://github.com/plataformatec/simple_form).
 
 ## Alternatives
