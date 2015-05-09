@@ -4,16 +4,21 @@ DynamicFieldsFor
 DynamicFieldsFor is a Rails plugin which provides the dynamic association fieldsets to your forms without a pain. And it does nothing more.
 
 The main features are:
-* Don't breakes the HTML layout - no any wrappers, additional divs etc;
+* Not breaks the HTML layout - no any wrappers, additional divs etc;
 * Works with fields block, i.e. not requires the separated partial for them;
-* Not provides new form helpers, but extend the existing ones;
-* Simple and predictable interface;
-* Not requires any special HTML tags or layout inside templates;
-* [Simple Form](https://github.com/plataformatec/simple_form) support.
+* Not provides new form helpers, but extend the existing one;
+* Simple and predictable interface and behavior;
+* Not requires any special HTML intities inside templates;
+* Supports [Simple Form](https://github.com/plataformatec/simple_form).
 
 ## Alternatives
 * [coccon](https://github.com/nathanvda/cocoon)
 * [Nested Form](https://github.com/ryanb/nested_form)
+
+## Dependencies
+* [rails](https://github.com/rails/rails) >= 3.2.13
+* [jquery-rails](https://github.com/rails/jquery-rails)
+* [association-soft-build](https://github.com/stokarenko/association-soft-build)
 
 ## Getting started
 
@@ -130,6 +135,5 @@ $(document).on('dynamic-fields:after-add', function(event){
 })
 ```
 
-## TODO
-* Try use HTML comments instead script tags (?)
-* Make coffeescript to be more readable.
+## License
+MIT License. Copyright (c) 2015 Sergey Tokarenko
