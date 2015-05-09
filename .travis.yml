@@ -15,8 +15,7 @@ matrix:
     - rvm: 2.2
       gemfile: gemfiles/rails_3.2.gemfile
 
-cache: bundler
-script: 'bundle exec rspec'
+script: 'xvfb-run bundle exec rspec'
 
 notifications:
   email: false
