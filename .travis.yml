@@ -10,4 +10,4 @@ gemfile:
   - gemfiles/rails_4.1.0.gemfile
   - gemfiles/rails_4.2.1.gemfile
 
-script: 'bundle exec rspec'
+script: 'xvfb-run bundle exec rspec'
