@@ -5,6 +5,7 @@ require 'dynamic-fields-for/version'
 Gem::Specification.new do |s|
   s.name        = 'dynamic-fields-for'
   s.version     = DynamicFieldsFor::VERSION.dup
+  s.platform    = Gem::Platform::RUBY
   s.authors     = 'Sergey Tokarenko'
   s.email       = 'private.tokarenko.sergey@gmail.com'
   s.homepage    = 'https://github.com/stokarenko/dynamic-fields-for'
@@ -13,6 +14,9 @@ Gem::Specification.new do |s|
   s.license     = 'MIT'
 
   s.files       = Dir['{app}/**/*', '{lib}/**/*', 'LICENSE', 'README.md']
+  s.test_files  = Dir['{spec}/**/*']
+
+  s.required_ruby_version = '>= 1.9.3'
 
   s.add_dependency 'rails', '>= 3.2.13'
   s.add_dependency 'jquery-rails'

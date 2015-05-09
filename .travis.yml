@@ -1,0 +1,18 @@
+language: ruby
+
+rvm:
+  - 1.9.3
+  - 2.2
+
+gemfile:
+  - gemfiles/rails_3.2.gemfile
+  - gemfiles/rails_4.0.gemfile
+  - gemfiles/rails_4.1.gemfile
+  - gemfiles/rails_4.2.gemfile
+
+matrix:
+  exclude:
+    - rvm: 2.2
+      gemfile: gemfiles/rails_3.2.gemfile
+
+script: 'xvfb-run bundle exec rspec'
