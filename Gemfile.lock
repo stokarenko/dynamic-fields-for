@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    dynamic-fields-for (1.0.1)
+    dynamic-fields-for (1.0.2)
       association-soft-build
       jquery-rails
       rails (>= 3.2.13)
