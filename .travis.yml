@@ -5,15 +5,15 @@ rvm:
   - 2.2
 
 gemfile:
-  - gemfiles/rails_3.2.gemfile
-  - gemfiles/rails_4.0.gemfile
-  - gemfiles/rails_4.1.gemfile
-  - gemfiles/rails_4.2.gemfile
+  - gemfiles/3.2.gemfile
+  - gemfiles/4.0.gemfile
+  - gemfiles/4.1.gemfile
+  - gemfiles/4.2.gemfile
 
 matrix:
   exclude:
     - rvm: 2.2
-      gemfile: gemfiles/rails_3.2.gemfile
+      gemfile: gemfiles/3.2.gemfile
 
 script: 'xvfb-run bundle exec rspec'
 
