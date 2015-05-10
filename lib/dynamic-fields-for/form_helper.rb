@@ -27,42 +27,65 @@ module DynamicFieldsFor
       options.delete(:child_index)
       collection_output = fields_for_without_dynamic_fields(association, record_object, options, &block)
 
-      @template.content_tag(:script, nil, data: {
-        'dynamic-fields-begin' => options[:dynamic_fields_id],
-        'dynamic-fields-add-template' => CGI.escapeHTML(add_template).html_safe,
-        'dynamic-fields-remove-template' => CGI.escapeHTML(remove_template).html_safe
-      }) +
-      collection_output +
-      @template.content_tag(:script, nil, data: {
-        'dynamic-fields-end' => options[:dynamic_fields_id]
-      })
+      cover_by_anchors(
+        {
+          begin: options[:dynamic_fields_id],
+          'add-template' => CGI.escapeHTML(add_template),
+          'remove-template' => CGI.escapeHTML(remove_template)
+        },
+        collection_output,
+        {end: options[:dynamic_fields_id]}
+      )
     end
 
     def add_fields_link(association, label, options = {})
-      @template.link_to(label, '#', {data: {'dynamic-fields-add' => dynamic_fields_id(association)}}.deep_merge(options))
+      @template.link_to(label, '#', dynamic_fields_data_options(add: dynamic_fields_id(association)).deep_merge(options))
     end
 
     def remove_fields_link(label, options = {})
-      data_options = {data: {'dynamic-fields-remove' => @options[:dynamic_fields_id]}}
-      data_options[:data]['dynamic-fields-remove-id'] = @object.id if @object.try(:persisted?)
+      anchor_options = {remove: @options[:dynamic_fields_id]}
+      anchor_options['remove-id'] = @object.id if @object.try(:persisted?)
 
-      @template.link_to(label, '#', data_options.deep_merge(options))
+      @template.link_to(label, '#', dynamic_fields_data_options(anchor_options).deep_merge(options))
     end
 
     def fields_for_nested_model_with_dynamic_fields(name, object, fields_options, block)
-      dynamic_item_begin_mark = fields_options.has_key?(:dynamic_fields_id) ?
-        @template.content_tag(:script, nil, data: {
-          'dynamic-fields-item-begin' => fields_options[:dynamic_fields_id]
-        }) : ''.html_safe
-
-        dynamic_item_begin_mark +
+      cover_by_anchors_if(
+        fields_options.has_key?(:dynamic_fields_id),
+        {'item-begin' => fields_options[:dynamic_fields_id]},
         fields_for_nested_model_without_dynamic_fields(name, object, fields_options, block)
+      )
     end
 
     private
 
     def dynamic_fields_id(association)
       "#{self.object_id}-#{association}"
+    end
+
+    def dynamic_fields_data_options(anchor_options)
+      return nil if anchor_options.nil?
+
+      anchor_options.inject({data: {}}) do |mem, (key, value)|
+        mem[:data][:"dynamic-fields-#{key}"] = value.try(:html_safe) || value
+        mem
+      end
+    end
+
+    def cover_by_anchors(begin_anchor_options, content, end_anchor_options = nil)
+      anchor(begin_anchor_options) + content + anchor(end_anchor_options)
+    end
+
+    def cover_by_anchors_if(condition, begin_anchor_options, content, end_anchor_options = nil)
+      condition ?
+        cover_by_anchors(begin_anchor_options, content, end_anchor_options) :
+        content
+    end
+
+    def anchor(anchor_options)
+      return ''.html_safe if anchor_options.nil?
+
+      @template.content_tag(:script, nil, dynamic_fields_data_options(anchor_options))
     end
 
   end
