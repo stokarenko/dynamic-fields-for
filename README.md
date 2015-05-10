@@ -1,7 +1,7 @@
 DynamicFieldsFor
 ================
 [![Version](https://badge.fury.io/rb/dynamic-fields-for.svg)](http://badge.fury.io/rb/dynamic-fields-for)
-[![Build](https://travis-ci.org/stokarenko/dynamic-fields-for.svg)](https://travis-ci.org/stokarenko/dynamic-fields-for)
+[![Build](https://travis-ci.org/stokarenko/dynamic-fields-for.svg?branch=master)](https://travis-ci.org/stokarenko/dynamic-fields-for)
 [![Climate](https://codeclimate.com/github/stokarenko/dynamic-fields-for/badges/gpa.svg)](https://codeclimate.com/github/stokarenko/dynamic-fields-for)
 [![Coverage](https://codeclimate.com/github/stokarenko/dynamic-fields-for/badges/coverage.svg)](https://codeclimate.com/github/stokarenko/dynamic-fields-for/coverage)
 
