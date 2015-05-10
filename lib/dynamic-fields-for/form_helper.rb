@@ -43,8 +43,12 @@ module DynamicFieldsFor
     end
 
     def remove_fields_link(label, options = {})
-      anchor_options = {remove: @options[:dynamic_fields_id]}
-      anchor_options['remove-id'] = @object.id if @object.try(:persisted?)
+      anchor_options = {}.tap do |mem|
+        if @options.has_key?(:dynamic_fields_id)
+          mem[:remove] = @options[:dynamic_fields_id]
+          mem['remove-id'] = @object.id if @object.try(:persisted?)
+        end
+      end
 
       @template.link_to(label, '#', dynamic_fields_data_options(anchor_options).deep_merge(options))
     end
@@ -67,7 +71,7 @@ module DynamicFieldsFor
       return nil if anchor_options.nil?
 
       anchor_options.inject({data: {}}) do |mem, (key, value)|
-        mem[:data][:"dynamic-fields-#{key}"] = value.try(:html_safe) || value
+        mem[:data][:"dynamic-fields-#{key}"] = value.html_safe? ? value : value.html_safe
         mem
       end
     end
