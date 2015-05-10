@@ -74,6 +74,8 @@ GEM
       json
     childprocess (0.5.6)
       ffi (~> 1.0, >= 1.0.11)
+    codeclimate-test-reporter (0.4.7)
+      simplecov (>= 0.7.1, < 1.0.0)
     coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
@@ -82,6 +84,7 @@ GEM
       execjs
     coffee-script-source (1.9.1.1)
     diff-lcs (1.2.5)
+    docile (1.1.5)
     erubis (2.7.0)
     execjs (2.5.2)
     ffi (1.9.8)
@@ -130,6 +133,11 @@ GEM
     simple_form (3.1.0)
       actionpack (~> 4.0)
       activemodel (~> 4.0)
+    simplecov (0.10.0)
+      docile (~> 1.1.0)
+      json (~> 1.8)
+      simplecov-html (~> 0.10.0)
+    simplecov-html (0.10.0)
     sprockets (3.0.3)
       rack (~> 1.0)
     sprockets-rails (2.3.0)
@@ -155,6 +163,7 @@ DEPENDENCIES
   bundler
   capybara
   capybara-webkit
+  codeclimate-test-reporter
   coffee-script
   dynamic-fields-for!
   haml
