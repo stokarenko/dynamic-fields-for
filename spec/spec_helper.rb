@@ -1,3 +1,6 @@
+require 'codeclimate-test-reporter'
+CodeClimate::TestReporter.start
+
 ENV['RAILS_ENV'] ||= 'test'
 require 'rails_app/config/environment'
 require 'rspec/rails'

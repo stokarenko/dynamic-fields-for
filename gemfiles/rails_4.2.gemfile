@@ -2,6 +2,7 @@
 
 source "http://rubygems.org"
 
+gem "codeclimate-test-reporter", :group => :test, :require => nil
 gem "rails", :github => "rails/rails", :branch => "4-2-stable"
 
 group :development, :test do
