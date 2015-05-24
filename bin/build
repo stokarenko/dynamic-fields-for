@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+require 'coffee-script'
+
+file_src = File.expand_path('../../src/js.coffee', __FILE__)
+file_build = File.expand_path('../../app/assets/javascripts/dynamic-fields-for.js', __FILE__)
+File.write(file_build, CoffeeScript.compile(File.read(file_src)))
