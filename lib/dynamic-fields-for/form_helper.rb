@@ -13,7 +13,7 @@ module DynamicFieldsFor
 
       return fields_for_without_dynamic_fields(association, record_object, options, &block) unless options.delete(:dynamic)
 
-      new_object = @object.send(association).soft_build
+      new_object = @object.association(association).soft_build
 
       options[:child_index] = 'dynamic_fields_index'
       remove_template = fields_for_without_dynamic_fields(association, new_object, options) do |f|
