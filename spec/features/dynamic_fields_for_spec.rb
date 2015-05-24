@@ -1,4 +1,4 @@
-describe DynamicFieldsFor::FormHelper do
+describe DynamicFieldsFor do
   describe '#fields_for' do
     def expect_result(user)
       expect(page).to have_button('Update User')

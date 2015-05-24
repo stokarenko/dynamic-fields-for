@@ -49,23 +49,22 @@ PATH
   remote: ../
   specs:
     dynamic-fields-for (1.0.2)
-      association-soft-build
+      activerecord-devkit
       jquery-rails
       rails (>= 3.2.13)
 
 GEM
   remote: http://rubygems.org/
   specs:
+    activerecord-devkit (1.0.0)
+      activerecord (>= 3.2.13)
+      ruby-features (>= 1.1.1)
     appraisal (2.0.1)
       activesupport (>= 3.2.21)
       bundler
       rake
       thor (>= 0.14.0)
     arel (5.0.1.20140414130214)
-    association-soft-build (0.0.2)
-      activerecord (>= 3.2.13)
-      activesupport (>= 3.2.13)
-      railties (>= 3.2.13)
     builder (3.2.2)
     capybara (2.4.4)
       mime-types (>= 1.16)
@@ -128,6 +127,7 @@ GEM
       rspec-mocks (~> 3.2.0)
       rspec-support (~> 3.2.0)
     rspec-support (3.2.2)
+    ruby-features (1.1.1)
     rubyzip (1.1.7)
     selenium-webdriver (2.45.0)
       childprocess (~> 0.5)

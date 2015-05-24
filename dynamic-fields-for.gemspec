@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'rails', '>= 3.2.13'
   s.add_dependency 'jquery-rails'
-  s.add_dependency 'association-soft-build'
+  s.add_dependency 'activerecord-devkit'
 
   s.add_development_dependency 'bundler'
 end
