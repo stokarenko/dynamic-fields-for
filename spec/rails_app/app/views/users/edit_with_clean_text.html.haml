@@ -1,0 +1,14 @@
+.clean-text
+  = form_for @resource do |f|
+    = f.fields_for :roles, dynamic: true do |rf|
+      clean text
+
+    = f.add_fields_link :roles, 'Add role'
+
+.clean-text-with-remove-link
+  = form_for @resource do |f|
+    = f.fields_for :roles, dynamic: true do |rf|
+      clean text
+      = rf.remove_fields_link 'Remove role'
+
+    = f.add_fields_link :roles, 'Add role'

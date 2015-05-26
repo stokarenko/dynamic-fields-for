@@ -67,6 +67,22 @@ describe DynamicFieldsFor do
       expect(page).to have_button('Update User')
     end
 
+    it 'should add fields with clean text' do
+      visit "/users/#{user.id}/edit_with_clean_text"
+      within('.clean-text') do
+        click_link 'Add role'
+        expect(page).to have_content(Array.new(4, 'clean text').push('Add role').join(' '))
+      end
+    end
+
+    it 'should remove fields with clean text' do
+      visit "/users/#{user.id}/edit_with_clean_text"
+      within('.clean-text-with-remove-link') do
+        remove_links.last.click
+        expect(page).to have_content(Array.new(2, 'clean text Remove role').push('Add role').join(' '))
+      end
+    end
+
     it 'should deal with turbolinks' do
       visit "/users/#{user.id}/edit_without_fields"
       click_link 'Edit'
