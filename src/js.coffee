@@ -34,7 +34,7 @@ class DynamicFields
     @$fields_parent = @$fields_begin.parent()
 
   add: ->
-    fields_add = $(@_render_insertion('Add'))
+    fields_add = $($.parseHTML(@_render_insertion('Add'), null, true))
 
     @$fields_parent.trigger('dynamic-fields:before-add-into')
     @$fields_end.before(fields_add)
@@ -56,9 +56,10 @@ class DynamicFields
       )
       @$fields_begin.after(destroy_inputs)
 
-    fields_remove = fields_item_begin.
-      nextUntil("#{@_anchor('item-begin')}, #{@_anchor('end')}").
-      andSelf()
+    all_fields = @$fields_parent.contents()
+    index_begin = all_fields.index(fields_item_begin)
+    index_end = all_fields.index(fields_item_begin.nextAll("#{@_anchor('item-begin')}, #{@_anchor('end')}").first())
+    fields_remove = all_fields.slice(index_begin, index_end)
 
     @$fields_parent.trigger('dynamic-fields:before-remove-from')
     fields_remove.not('script').trigger('dynamic-fields:before-remove')
