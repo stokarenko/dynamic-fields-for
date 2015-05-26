@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    dynamic-fields-for (1.0.3)
+    dynamic-fields-for (1.0.4)
       activerecord-devkit
       jquery-rails
       rails (>= 3.2.13)
