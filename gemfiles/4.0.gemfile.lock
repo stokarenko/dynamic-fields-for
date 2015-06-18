@@ -51,6 +51,9 @@ PATH
 GEM
   remote: http://rubygems.org/
   specs:
+    active_attr (0.8.5)
+      activemodel (>= 3.0.2, < 5.0)
+      activesupport (>= 3.0.2, < 5.0)
     activerecord-deprecated_finders (1.0.4)
     activerecord-devkit (1.0.0)
       activerecord (>= 3.2.13)
@@ -159,6 +162,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_attr
   appraisal
   bundler
   capybara

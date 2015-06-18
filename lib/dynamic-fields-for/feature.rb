@@ -16,7 +16,10 @@ RubyFeatures.define 'dynamic_fields_for' do
 
         return fields_for_without_dynamic_fields(association, record_object, options, &block) unless options.delete(:dynamic)
 
-        new_object = @object.association(association).soft_build
+        soft_build_method_name = :"#{association}_soft_build"
+        new_object = @object.respond_to?(soft_build_method_name) ?
+          @object.send(soft_build_method_name) :
+          @object.association(association).soft_build
 
         options[:child_index] = 'dynamic_fields_index'
         remove_template = fields_for_without_dynamic_fields(association, new_object, options) do |f|
