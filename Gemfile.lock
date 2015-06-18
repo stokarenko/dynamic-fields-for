@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    dynamic-fields-for (1.0.4)
+    dynamic-fields-for (1.1.0)
       activerecord-devkit
       jquery-rails
       rails (>= 3.2.13)
@@ -32,7 +32,7 @@ GEM
       activemodel (= 4.1.10)
       activesupport (= 4.1.10)
       arel (~> 5.0.0)
-    activerecord-devkit (1.0.0)
+    activerecord-devkit (1.1.0)
       activerecord (>= 3.2.13)
       ruby-features (>= 1.1.1)
     activesupport (4.1.10)
@@ -139,7 +139,7 @@ GEM
       json (~> 1.8)
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.0)
-    sprockets (3.1.0)
+    sprockets (3.2.0)
       rack (~> 1.0)
     sprockets-rails (2.3.1)
       actionpack (>= 3.0)

@@ -48,7 +48,7 @@ GIT
 PATH
   remote: ../
   specs:
-    dynamic-fields-for (1.0.4)
+    dynamic-fields-for (1.1.0)
       activerecord-devkit
       jquery-rails
       rails (>= 3.2.13)
@@ -59,7 +59,7 @@ GEM
     active_attr (0.8.5)
       activemodel (>= 3.0.2, < 5.0)
       activesupport (>= 3.0.2, < 5.0)
-    activerecord-devkit (1.0.0)
+    activerecord-devkit (1.1.0)
       activerecord (>= 3.2.13)
       ruby-features (>= 1.1.1)
     appraisal (2.0.1)
