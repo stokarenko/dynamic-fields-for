@@ -14,6 +14,7 @@ The main features are:
 * Simple and predictable interface and behavior;
 * Not requires any special HTML entities inside templates;
 * Supports [Simple Form](https://github.com/plataformatec/simple_form).
+* Supports not ActiveRecord models
 
 ## Alternatives
 * [coccon](https://github.com/nathanvda/cocoon)
@@ -102,6 +103,46 @@ DynamicFieldsFor supports SimpleForm:
     = rf.remove_fields_link 'Remove role'
 
   = f.add_fields_link :roles, 'Add role'
+
+  = f.submit
+```
+
+## Not ActiveRecord models
+To use DynamicFieldsFor with not ActiveRecord, need to define two methods in your model, `{association}_soft_build` and `{association}_attributes=`:
+
+```ruby
+class EmailForm
+  include ActiveAttr::Model
+
+  attribute :recipients, type: Object, default: []
+
+  def recipients_attributes=(attributes)
+    self.recipients = attributes.values.map{ |attrs| recipients_soft_build(attrs) }
+  end
+
+  def recipients_soft_build(attrs = {})
+    Recipient.new(attrs)
+  end
+
+end
+
+class Recipient
+  include ActiveAttr::Model
+
+  attribute :email
+
+  validates :email,  presence: true
+end
+```
+
+Template will stay to be as usual:
+```haml
+= form_for resource do |f|
+  = f.fields_for :recipients, dynamic: true do |rf|
+    = rf.text_field :email
+    = rf.remove_fields_link 'Remove recipient'
+
+  = f.add_fields_link :recipients, 'Add recipient'
 
   = f.submit
 ```

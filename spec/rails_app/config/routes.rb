@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :email_forms
+
   resources :users do
     member do
       get 'edit_without_fields'

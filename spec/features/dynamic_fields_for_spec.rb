@@ -9,16 +9,24 @@ describe DynamicFieldsFor do
       all('[name$="[role_name]"]')
     end
 
-    def remove_links
+    def remove_role_links
       all('a', text: 'Remove role')
     end
 
+    def email_inputs
+      all('[name$="[email]"]')
+    end
+
+    def remove_email_links
+      all('a', text: 'Remove recipient')
+    end
+
     def deal_with_dynamic_roles
-      expect{remove_links.last.click}.to change{remove_links.size}.from(3).to(2)
-      expect{2.times{ click_link 'Add role'}}.to change{remove_links.size}.to(4)
-      expect{remove_links.last.click}.to change{remove_links.size}.to(3)
-      expect{click_link 'Add role'}.to change{remove_links.size}.to(4)
-      expect{remove_links[1].click}.to change{remove_links.size}.to(3)
+      expect{remove_role_links.last.click}.to change{remove_role_links.size}.from(3).to(2)
+      expect{2.times{ click_link 'Add role'}}.to change{remove_role_links.size}.to(4)
+      expect{remove_role_links.last.click}.to change{remove_role_links.size}.to(3)
+      expect{click_link 'Add role'}.to change{remove_role_links.size}.to(4)
+      expect{remove_role_links[1].click}.to change{remove_role_links.size}.to(3)
 
       role_inputs.last(2).each_with_index do |element, index|
         element.set("new role #{index}")
@@ -56,7 +64,22 @@ describe DynamicFieldsFor do
 
           expect_result(user)
         end
+
       end
+    end
+
+    it 'should work with ActiveAttr' do
+      visit '/email_forms/new'
+      3.times{ click_link 'Add recipient' }
+      remove_email_links.last.click
+
+      email_inputs.last(2).each_with_index do |element, index|
+        element.set("email#{index}@qwerty.com")
+      end
+
+      click_button 'Create Email form'
+
+      expect(page).to have_content('Emails was sent to email0@qwerty.com, email1@qwerty.com')
     end
 
     it 'should not fail when remove link clicked but dynamic fields are not exists' do
@@ -78,7 +101,7 @@ describe DynamicFieldsFor do
     it 'should remove fields with clean text' do
       visit "/users/#{user.id}/edit_with_clean_text"
       within('.clean-text-with-remove-link') do
-        remove_links.last.click
+        remove_role_links.last.click
         expect(page).to have_content(Array.new(2, 'clean text Remove role').push('Add role').join(' '))
       end
     end
@@ -88,7 +111,7 @@ describe DynamicFieldsFor do
       click_link 'Edit'
 
       within('#form_for') do
-        expect{click_link 'Add role'}.to change{remove_links.size}.from(3).to(4)
+        expect{click_link 'Add role'}.to change{remove_role_links.size}.from(3).to(4)
       end
 
     end

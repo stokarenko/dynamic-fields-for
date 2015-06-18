@@ -22,6 +22,9 @@ GEM
       activesupport (= 4.1.10)
       builder (~> 3.1)
       erubis (~> 2.7.0)
+    active_attr (0.8.5)
+      activemodel (>= 3.0.2, < 5.0)
+      activesupport (>= 3.0.2, < 5.0)
     activemodel (4.1.10)
       activesupport (= 4.1.10)
       builder (~> 3.1)
@@ -158,6 +161,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_attr
   appraisal
   bundler
   capybara
