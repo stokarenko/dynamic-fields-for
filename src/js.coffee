@@ -79,10 +79,11 @@ class DynamicFields
       "$1#{new Date().getTime() + @constructor._counter++}$2"
     )
 
-$(document).on 'click', '[data-dynamic-fields-remove]', (event) ->
-  event.preventDefault()
-  DynamicFields.remove(@)
+$(document).on 'ready page:load', ->
+  $(document).on 'click', '[data-dynamic-fields-remove]', (event) ->
+    event.preventDefault()
+    DynamicFields.remove(@)
 
-$(document).on 'click', '[data-dynamic-fields-add]', (event) ->
-  event.preventDefault()
-  DynamicFields.add(@)
+  $(document).on 'click', '[data-dynamic-fields-add]', (event) ->
+    event.preventDefault()
+    DynamicFields.add(@)
