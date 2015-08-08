@@ -17,7 +17,7 @@ The main features are:
 * Supports not ActiveRecord models
 
 ## Alternatives
-* [coccon](https://github.com/nathanvda/cocoon)
+* [cocoon](https://github.com/nathanvda/cocoon)
 * [Nested Form](https://github.com/ryanb/nested_form)
 
 ## Dependencies
