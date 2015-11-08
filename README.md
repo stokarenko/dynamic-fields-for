@@ -5,14 +5,14 @@ DynamicFieldsFor
 [![Climate](https://codeclimate.com/github/stokarenko/dynamic-fields-for/badges/gpa.svg)](https://codeclimate.com/github/stokarenko/dynamic-fields-for)
 [![Coverage](https://codeclimate.com/github/stokarenko/dynamic-fields-for/badges/coverage.svg)](https://codeclimate.com/github/stokarenko/dynamic-fields-for/coverage)
 
-DynamicFieldsFor is a Rails plugin which provides the dynamic association fieldsets to your forms without a pain. And it does nothing more.
+DynamicFieldsFor is a Rails plugin which provides the dynamic association fieldsets to your forms without pain. And it does nothing else.
 
 The main features are:
-* Not breaks the HTML layout - no any wrappers, additional divs etc;
-* Works with fields block, i.e. not requires the separated partial for them;
-* Not provides new form helpers, but extend the existing one;
+* Doesn't break the HTML layout - no wrappers, additional divs etc;
+* Works with fields block, i.e. doesn't require the separated partial for them;
+* Doesn't provide new form helpers, but extends the existing one;
 * Simple and predictable interface and behavior;
-* Not requires any special HTML entities inside templates;
+* Doesn't require any special HTML entities inside templates;
 * Supports [Simple Form](https://github.com/plataformatec/simple_form).
 * Supports not ActiveRecord models
 
@@ -56,7 +56,7 @@ class Role < ActiveRecod::Base
 end
 ```
 
-First, apply `inverse_of` to User's `:roles` associations, otherwise no chance to pass
+First, apply `inverse_of` to User's `:roles` associations, otherwise there is no chance to pass
 the validation of Role's user presence on user creation:
 ```ruby
 class User < ActiveRecord::Base
@@ -71,7 +71,7 @@ accepts_nested_attributes_for :roles, allow_destroy: true
 
 Skip `allow_destroy` definition if you don't need to use `remove_fields_link` helper).
 
-Take care about strong parameters in controller like that:
+Take care about strong parameters in controller like this:
 ```ruby
 params.require(:user).permit(roles_attributes: [:id, :_destroy])
 ```
@@ -108,7 +108,7 @@ DynamicFieldsFor supports SimpleForm:
 ```
 
 ## Not ActiveRecord models
-To use DynamicFieldsFor with not ActiveRecord, need to define two methods in your model, `{association}_soft_build` and `{association}_attributes=`:
+To use DynamicFieldsFor with not ActiveRecord, it's necessary to define two methods in your model, `{association}_soft_build` and `{association}_attributes=`:
 
 ```ruby
 class EmailForm
@@ -150,12 +150,12 @@ Template will stay to be as usual:
 ## JavaScript events
 There are the events which will be triggered on `add_fields_link` click, in actual order:
 * `dynamic-fields:before-add-into` touched to dynamic fields parent node;
-* `dynamic-fields:after-add` touched to each first-level elements which was inserted;
+* `dynamic-fields:after-add` touched to each first-level elements which were inserted;
 * `dynamic-fields:after-add-into` touched to dynamic fields parent node;
 
 Like that, these events will be triggered on `add_fields_link` click, in actual order:
 * `dynamic-fields:before-remove-from` touched to dynamic fields parent node;
-* `dynamic-fields:before-remove` touched to each first-level elements which going to be removed;
+* `dynamic-fields:before-remove` touched to each first-level elements which are going to be removed;
 * `dynamic-fields:after-remove-from` touched to dynamic fields parent node;
 
 Typical callback for dynamic fields parent node looks like:
@@ -165,7 +165,7 @@ $(document).on('dynamic-fields:after-add-into', function(event){
 })
 ```
 
-As for first-level elements, need to remember that compatible callbacks
+As for first-level elements, compatible callbacks
 will be triggered to each of them. To deal with this,
 use `$.find2` javascript helper, which provided by DynamicFieldsFor:
 ```js
@@ -174,7 +174,7 @@ $('#some_id').find2('.some_class');
 $('#some_id').find('.some_class').add($('#some_id').filter('.some_class'));
 ```
 
-Typical event callback first-level elements should looks like:
+Typical event callback first-level elements should look like:
 ```js
 $(document).on('dynamic-fields:after-add', function(event){
   $(event.target).find2('.datepicker').datetimepicker();
