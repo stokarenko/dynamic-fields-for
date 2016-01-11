@@ -10,7 +10,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'capybara'
   gem 'capybara-webkit'
-  gem 'selenium-webdriver', '~> 2.45.0'
+  gem 'selenium-webdriver'
   gem 'sqlite3'
 end
 
