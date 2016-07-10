@@ -1,5 +1,5 @@
 class EmailFormsController < ApplicationController
-  before_filter :build_resource, only: [:new, :create]
+  before_action :build_resource, only: [:new, :create]
 
   private
 

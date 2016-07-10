@@ -1,6 +1,10 @@
 module DynamicFieldsFor
   def self.rails3?
-    Rails.version.start_with? '3'
+    rails_version == 3
+  end
+
+  def self.rails_version
+    Rails.version[0].to_i
   end
 end
 

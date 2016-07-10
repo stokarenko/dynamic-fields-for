@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_filter :build_resource, only: [:new, :create]
-  before_filter :load_resource, except: [:new, :create]
+  before_action :build_resource, only: [:new, :create]
+  before_action :load_resource, except: [:new, :create]
 
   def new
     3.times{ @resource.roles.build }

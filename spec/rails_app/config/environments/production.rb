@@ -20,9 +20,11 @@ RailsApp::Application.configure do
   # config.action_dispatch.rack_cache = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this).
-  DynamicFieldsFor.rails3? ?
-  config.serve_static_assets = false :
-    config.serve_static_files = false
+  case DynamicFieldsFor.rails_version
+    when 3 then config.serve_static_assets = false
+    when 4 then config.serve_static_files = false
+    else config.public_file_server.enabled = false
+  end
 
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = :uglifier

@@ -13,10 +13,12 @@ RailsApp::Application.configure do
   config.eager_load = false
 
   # Configure static asset server for tests with Cache-Control for performance.
-  DynamicFieldsFor.rails3? ?
-  config.serve_static_assets = true :
-    config.serve_static_files = true
-  config.static_cache_control = 'public, max-age=3600'
+  case DynamicFieldsFor.rails_version
+    when 3 then config.serve_static_assets = true
+    when 4 then config.serve_static_files = true
+    else config.public_file_server.enabled = true
+  end
+  config.public_file_server.headers = { 'Cache-Control' => 'public, max-age=3600' }
 
   # Show full error reports and disable caching.
   config.consider_all_requests_local       = true
