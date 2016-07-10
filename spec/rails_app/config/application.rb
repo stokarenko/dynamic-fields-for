@@ -21,7 +21,7 @@ module RailsApp
     # config.i18n.default_locale = :de
 
     # Enable the asset pipeline
-    unless DynamicFieldsFor.rails4?
+    if DynamicFieldsFor.rails3?
       config.assets.enabled = true
     end
   end

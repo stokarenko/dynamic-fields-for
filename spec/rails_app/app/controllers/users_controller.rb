@@ -31,8 +31,8 @@ class UsersController < ApplicationController
   end
 
   def resource_params
-    DynamicFieldsFor.rails4? ?
-      params.fetch(:user, {}).permit(:user_name, roles_attributes: [:id, :role_name, :_destroy]) :
-      params[:user]
+    DynamicFieldsFor.rails3? ?
+      params[:user] :
+      params.fetch(:user, {}).permit(:user_name, roles_attributes: [:id, :role_name, :_destroy])
   end
 end

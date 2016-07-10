@@ -1,6 +1,6 @@
 module DynamicFieldsFor
-  def self.rails4?
-    Rails.version.start_with? '4'
+  def self.rails3?
+    Rails.version.start_with? '3'
   end
 end
 
