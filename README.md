@@ -21,7 +21,7 @@ The main features are:
 * [Nested Form](https://github.com/ryanb/nested_form)
 
 ## Dependencies
-* Ruby >= 2.0
+* Ruby >= 2.2.2
 * [rails](https://github.com/rails/rails) >= 5.0.0
 * [jquery-rails](https://github.com/rails/jquery-rails)
 * [activerecord-devkit](https://github.com/stokarenko/activerecord-devkit), `association_soft_build` feature

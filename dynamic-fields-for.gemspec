@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.files       = Dir['{app}/**/*', '{lib}/**/*', 'LICENSE', 'README.md']
   s.test_files  = Dir['{spec}/**/*']
 
-  s.required_ruby_version = '>= 2.0.0'
+  s.required_ruby_version = '>= 2.2.2'
 
   s.add_dependency 'rails', '>= 5.0.0'
   s.add_dependency 'jquery-rails'
