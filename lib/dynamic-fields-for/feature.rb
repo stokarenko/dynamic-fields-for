@@ -4,17 +4,12 @@ RubyFeatures.define 'dynamic_fields_for' do
 
   apply_to 'ActionView::Helpers::FormBuilder' do
 
-    applied do
-      alias_method_chain :fields_for, :dynamic_fields
-      alias_method_chain :fields_for_nested_model, :dynamic_fields
-    end
-
-    instance_methods do
-      def fields_for_with_dynamic_fields(association, record_object = nil, options = {}, &block)
+    rewrite_instance_methods do
+      def fields_for(association, record_object = nil, options = {}, &block)
         #Inherit the native parameters adjustment
         options, record_object = record_object, nil if record_object.is_a?(Hash) && record_object.extractable_options?
 
-        return fields_for_without_dynamic_fields(association, record_object, options, &block) unless options.delete(:dynamic)
+        return super(association, record_object, options, &block) unless options.delete(:dynamic)
 
         soft_build_method_name = :"#{association}_soft_build"
         new_object = @object.respond_to?(soft_build_method_name) ?
@@ -22,16 +17,16 @@ RubyFeatures.define 'dynamic_fields_for' do
           @object.association(association).soft_build
 
         options[:child_index] = 'dynamic_fields_index'
-        remove_template = fields_for_without_dynamic_fields(association, new_object, options) do |f|
+        remove_template = super(association, new_object, options) do |f|
           f.hidden_field(:id, value: 'dynamic_fields_object_id') +
           f.hidden_field(:_destroy, value: true)
         end
 
         options[:dynamic_fields_id] = dynamic_fields_id(association)
-        add_template = fields_for_without_dynamic_fields(association, new_object, options, &block)
+        add_template = super(association, new_object, options, &block)
 
         options.delete(:child_index)
-        collection_output = fields_for_without_dynamic_fields(association, record_object, options, &block)
+        collection_output = super(association, record_object, options, &block)
 
         cover_by_anchors(
           {
@@ -44,6 +39,18 @@ RubyFeatures.define 'dynamic_fields_for' do
         )
       end
 
+      private
+
+      def fields_for_nested_model(name, object, fields_options, block)
+        cover_by_anchors_if(
+          fields_options.has_key?(:dynamic_fields_id),
+          {'item-begin' => fields_options[:dynamic_fields_id]},
+          super(name, object, fields_options, block)
+        )
+      end
+    end
+
+    instance_methods do
       def add_fields_link(association, label, options = {})
         @template.link_to(label, '#', dynamic_fields_data_options(add: dynamic_fields_id(association)).deep_merge(options))
       end
@@ -59,13 +66,6 @@ RubyFeatures.define 'dynamic_fields_for' do
         @template.link_to(label, '#', dynamic_fields_data_options(anchor_options).deep_merge(options))
       end
 
-      def fields_for_nested_model_with_dynamic_fields(name, object, fields_options, block)
-        cover_by_anchors_if(
-          fields_options.has_key?(:dynamic_fields_id),
-          {'item-begin' => fields_options[:dynamic_fields_id]},
-          fields_for_nested_model_without_dynamic_fields(name, object, fields_options, block)
-        )
-      end
 
       private
 
