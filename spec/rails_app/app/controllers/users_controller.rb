@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_filter :build_resource, only: [:new, :create]
-  before_filter :load_resource, except: [:new, :create]
+  before_action :build_resource, only: [:new, :create]
+  before_action :load_resource, except: [:new, :create]
 
   def new
     3.times{ @resource.roles.build }
@@ -31,8 +31,6 @@ class UsersController < ApplicationController
   end
 
   def resource_params
-    DynamicFieldsFor.rails4? ?
-      params.fetch(:user, {}).permit(:user_name, roles_attributes: [:id, :role_name, :_destroy]) :
-      params[:user]
+    params.fetch(:user, {}).permit(:user_name, roles_attributes: [:id, :role_name, :_destroy])
   end
 end
