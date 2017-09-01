@@ -4,6 +4,13 @@
 
     = f.fields_for :roles, dynamic: true do |rf|
       = rf.text_field :role_name
+
+      = rf.fields_for :permissions, dynamic: true do |pf|
+        = pf.text_field :permission_name
+        = pf.remove_fields_link 'Remove permission'
+
+      = rf.add_fields_link :permissions, 'Add permission'
+
       = rf.remove_fields_link 'Remove role'
 
     = f.add_fields_link :roles, 'Add role'
@@ -16,6 +23,14 @@
 
     = f.simple_fields_for :roles, dynamic: true do |rf|
       = rf.input :role_name
+
+      = rf.simple_fields_for :permissions, dynamic: true do |pf|
+
+        = pf.input :permission_name
+        .remove_link= pf.remove_fields_link 'Remove permission'
+
+      = rf.add_fields_link :permissions, 'Add permission'
+
       .remove_link= rf.remove_fields_link 'Remove role'
 
     = f.add_fields_link :roles, 'Add role'

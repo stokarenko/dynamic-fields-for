@@ -3,7 +3,10 @@ class UsersController < ApplicationController
   before_action :load_resource, except: [:new, :create]
 
   def new
-    3.times{ @resource.roles.build }
+    3.times {
+      role = @resource.roles.build
+      3.times { role.permissions.build }
+    }
   end
 
   def create
@@ -31,6 +34,6 @@ class UsersController < ApplicationController
   end
 
   def resource_params
-    params.fetch(:user, {}).permit(:user_name, roles_attributes: [:id, :role_name, :_destroy])
+    params.fetch(:user, {}).permit(:user_name, roles_attributes: [:id, :role_name, :_destroy, permissions_attributes: [:id, :permission_name, :_destroy]])
   end
 end

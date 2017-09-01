@@ -8,5 +8,10 @@ class CreateTables < ActiveRecord::Migration[4.2]
       t.references :user
       t.string :role_name
     end
+
+    create_table :permissions do |t|
+      t.references :role
+      t.string :permission_name
+    end
   end
 end
