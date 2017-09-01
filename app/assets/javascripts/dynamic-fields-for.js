@@ -95,9 +95,19 @@
     };
 
     DynamicFields.prototype._render_insertion = function(template_type) {
-      var template;
-      template = this.$fields_begin.data("dynamicFields" + template_type + "Template");
-      return template.replace(/([_\[])dynamic_fields_index([_\]])/g, "$1" + (new Date().getTime() + this.constructor._counter++) + "$2");
+      var match, regex, res, template;
+      res = template = this.$fields_begin.data("dynamicFields" + template_type + "Template");
+      regex = /data-dynamic-fields-begin="(\d+([^"]+))/g;
+      while ((match = regex.exec(template))) {
+        console.log(match);
+        console.log("" + (this._next_index()) + match[2]);
+        res = res.replace(new RegExp(match[1], 'g'), "" + (this._next_index()) + match[2]);
+      }
+      return res.replace(/(["';][^"';]*?)dynamic_fields_index/g, "$1" + (this._next_index()));
+    };
+
+    DynamicFields.prototype._next_index = function() {
+      return new Date().getTime() + this.constructor._counter++;
     };
 
     return DynamicFields;

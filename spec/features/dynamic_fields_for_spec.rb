@@ -3,6 +3,7 @@ describe DynamicFieldsFor do
     def expect_result(user)
       expect(page).to have_button('Update User')
       expect(user.roles.map(&:role_name)).to match_array(['role 0', 'new role 0', 'new role 1'])
+      expect(user.roles.flat_map(&:permissions).map(&:permission_name)).to match_array(['permission 0', 'new permission 0', 'new permission 1'])
     end
 
     def role_inputs
@@ -13,6 +14,18 @@ describe DynamicFieldsFor do
       all('a', text: 'Remove role')
     end
 
+    def permission_inputs
+      all('[name$="[permission_name]"]')
+    end
+
+    def add_permission_links
+      all('a', text: 'Add permission')
+    end
+
+    def remove_permission_links
+      all('a', text: 'Remove permission')
+    end
+
     def email_inputs
       all('[name$="[email]"]')
     end
@@ -21,15 +34,39 @@ describe DynamicFieldsFor do
       all('a', text: 'Remove recipient')
     end
 
-    def deal_with_dynamic_roles
+    def deal_with_dynamic_fields
       expect{remove_role_links.last.click}.to change{remove_role_links.size}.from(3).to(2)
+        .and change{add_permission_links.size}.from(3).to(2)
+        .and change{remove_permission_links.size}.from(9).to(6)
+
       expect{2.times{ click_link 'Add role'}}.to change{remove_role_links.size}.to(4)
+        .and change{add_permission_links.size}.to(4)
+        .and change{remove_permission_links.size}.by(0)
+
       expect{remove_role_links.last.click}.to change{remove_role_links.size}.to(3)
+        .and change{add_permission_links.size}.to(3)
+        .and change{remove_permission_links.size}.by(0)
+
       expect{click_link 'Add role'}.to change{remove_role_links.size}.to(4)
+        .and change{add_permission_links.size}.to(4)
+        .and change{remove_permission_links.size}.by(0)
+
       expect{remove_role_links[1].click}.to change{remove_role_links.size}.to(3)
+        .and change{add_permission_links.size}.to(3)
+        .and change{remove_permission_links.size}.to(3)
 
       role_inputs.last(2).each_with_index do |element, index|
         element.set("new role #{index}")
+      end
+
+      expect{remove_permission_links.last.click}.to change{remove_permission_links.size}.from(3).to(2)
+      expect{2.times{ add_permission_links[0].click }}.to change{remove_permission_links.size}.to(4)
+      expect{remove_permission_links.last.click}.to change{remove_permission_links.size}.to(3)
+      expect{add_permission_links[0].click}.to change{remove_permission_links.size}.to(4)
+      expect{remove_permission_links[1].click}.to change{remove_permission_links.size}.to(3)
+
+      permission_inputs.last(2).each_with_index do |element, index|
+        element.set("new permission #{index}")
       end
     end
 
@@ -42,10 +79,11 @@ describe DynamicFieldsFor do
           visit "/users/new"
 
           within("##{form_type}") do
-            deal_with_dynamic_roles
+            deal_with_dynamic_fields
 
             fill_in 'user[user_name]', with: 'New user'
             role_inputs.first.set('role 0')
+            permission_inputs.first.set('permission 0')
 
             click_button 'Create User'
           end
@@ -57,7 +95,7 @@ describe DynamicFieldsFor do
           visit "/users/#{user.id}/edit"
 
           within("##{form_type}") do
-            deal_with_dynamic_roles
+            deal_with_dynamic_fields
 
             click_button 'Update User'
           end

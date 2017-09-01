@@ -15,6 +15,7 @@ The main features are:
 * Doesn't require any special HTML entities inside templates;
 * Supports [Simple Form](https://github.com/plataformatec/simple_form).
 * Supports not ActiveRecord models
+* Supports nested dynamic fields
 
 ## Alternatives
 * [cocoon](https://github.com/nathanvda/cocoon)

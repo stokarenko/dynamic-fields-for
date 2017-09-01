@@ -73,11 +73,19 @@ class DynamicFields
     @constructor._$anchor(postfix, @fields_id)
 
   _render_insertion: (template_type) ->
-    template = @$fields_begin.data("dynamicFields#{template_type}Template")
-    template.replace(
-      /([_\[])dynamic_fields_index([_\]])/g,
-      "$1#{new Date().getTime() + @constructor._counter++}$2"
+    res = template = @$fields_begin.data("dynamicFields#{template_type}Template")
+
+    regex = /data-dynamic-fields-begin="(\d+([^"]+))/g
+    while ( match = regex.exec(template) )
+      res = res.replace(new RegExp(match[1], 'g'), "#{ @._next_index() }#{ match[2] }")
+
+    res.replace(
+      /(["';][^"';]*?)dynamic_fields_index/g,
+      "$1#{@_next_index()}"
     )
+
+  _next_index: ->
+    new Date().getTime() + @constructor._counter++
 
 $(document).on 'click', '[data-dynamic-fields-remove]', (event) ->
   event.preventDefault()

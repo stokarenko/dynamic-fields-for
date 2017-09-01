@@ -1,0 +1,35 @@
+permission_8:
+  role: role_2
+  permission_name: permission 8
+
+permission_7:
+  role: role_2
+  permission_name: permission 7
+
+permission_6:
+  role: role_2
+  permission_name: permission 6
+
+permission_5:
+  role: role_1
+  permission_name: permission 5
+
+permission_4:
+  role: role_1
+  permission_name: permission 4
+
+permission_3:
+  role: role_1
+  permission_name: permission 3
+
+permission_2:
+  role: role_0
+  permission_name: permission 2
+
+permission_1:
+  role: role_0
+  permission_name: permission 1
+
+permission_0:
+  role: role_0
+  permission_name: permission 0
