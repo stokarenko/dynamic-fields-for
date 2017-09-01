@@ -3,9 +3,11 @@ language: ruby
 rvm:
   - 2.2.2
   - 2.3.1
+  - 2.4.1
 
 gemfile:
   - gemfiles/5.0.gemfile
+  - gemfiles/5.1.gemfile
 
 script: 'xvfb-run bundle exec rspec'
 

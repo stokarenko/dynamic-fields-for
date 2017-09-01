@@ -3,7 +3,7 @@
 source "http://rubygems.org"
 
 gem "codeclimate-test-reporter", :group => :test, :require => nil
-gem "rails", :github => "rails/rails", :branch => "5-0-stable"
+gem "rails", :github => "rails/rails", :branch => "5-1-stable"
 
 group :development, :test do
   gem "appraisal"
